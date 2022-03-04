@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mesto</title>
+  <title>Место</title>
   <link rel="stylesheet" href="./pages/index.css">
   
 </head>
 <body>
     <div class="page">
+      <div class="page__container">
         <header class="header">
             <img class="header__logo" src="./images/Vector-2.svg" alt="Логотип Место">
-            <hr class="header__line">
+            
         </header>
         <main class="content">
             <section class="profile">
@@ -21,83 +22,90 @@
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
                         <p class="profile__subtitle">Исследователь океана</p>
                     </div>
-                    <button class="profile__edit-button popup-open" type="button"></button>
+                    <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
                 </div>
-                <button class="profile__add-button" type="button"></button>
+                <button class="profile__add-button" type="button" aria-label="Добавить фото"></button>
             </section>
 
             <section class="elements">
-                <div class="element">
+                <article class="element">
                     <img src="./images/Карачаевск.png" class="element__image" alt="Карачаевск">
                     
                     <div class="element__info">
                         <h2 class="element__title">Карачаевск</h2>
-                        <button class="element__button" type="button"></button>
+                        <button class="element__button" type="button" aria-label="Лайк"></button>
                     </div>
-                </div>
-                <div class="element">
+                </article>
+                <article class="element">
                     
                         <img src="./images/Эльбрус.png" class="element__image" alt="Гора Эльбрус">
                     
                     <div class="element__info">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__button" type="button"></button>
+                        <button class="element__button" type="button" aria-label="Лайк"></button>
                     </div>
-                </div>
-                <div class="element">
+                </article>
+                <article class="element">
                     
                         <img src="./images/Домбай.png" class="element__image" alt="Домбай">
                     
                     <div class="element__info">
                         <h2 class="element__title">Домбай</h2>
-                        <button class="element__button" type="button"></button>
+                        <button class="element__button" type="button" aria-label="Лайк"></button>
                     </div>
-                </div>
-                <div class="element">
+                </article>
+                <article class="element">
                     
                         <img src="./images/Байкал.png" class="element__image" alt="Байкал">
                     
                     <div class="element__info">
                         <h2 class="element__title">Байкал</h2>
-                        <button class="element__button" type="button"></button>
+                        <button class="element__button" type="button" aria-label="Лайк"></button>
                     </div>
-                </div>
-                <div class="element">
+                </article>
+                <article class="element">
                     
                         <img src="./images/Камчатка.png" class="element__image" alt="Камчатка">
                     
                     <div class="element__info">
                         <h2 class="element__title">Камчатка</h2>
-                        <button class="element__button" type="button"></button>
+                        <button class="element__button" type="button" aria-label="Лайк"></button>
                     </div>
-                </div>
-                <div class="element">
+                </article>
+                <article class="element">
                     
                         <img src="./images/Коса.png" class="element__image" alt="Куршская коса">
                     
                     <div class="element__info">
                         <h2 class="element__title">Куршская коса</h2>
-                        <button class="element__button" type="button"></button>
+                        <button class="element__button" type="button" aria-label="Лайк"></button>
                     </div>
-                </div>
+                </article>
             </section>
 
             <footer class="footer">
-                <p class="footer__text">©2022 Mesto Russia</p>
+                <p class="footer__text">&copy;2022 Mesto Russia</p>
             </footer>
         </main>
+      </div>
+
+        <div class="popup">
+        
+            <div class="popup__container">
+                <button class="popup__close" type="button" aria-label="Закрыть попап"></button>
+                <form class="popup__form" name="profileData">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input class="popup__input popup__input_name" name="title" type="text">
+                    <input class="popup__input popup__input_description" name="subtitle" type="text">
+                    <button class="popup__save" type="submit">Сохранить</button>
+                </form>
+            
+            </div>
+        </div>
+      
     </div>
     
-    <div class="popup">
-        
-        <div class="popup__container">
-            <button class="popup__close" type="button" aria-label="Закрыть попап"></button>
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input class="popup__name" type="text">
-            <input class="popup__about" type="text">
-            <button class="popup__save" type="submit">Сохранить</button>
-        </div>
-    </div>
+   
 
 <script src="./scripts/script.js"></script>
 </body>
