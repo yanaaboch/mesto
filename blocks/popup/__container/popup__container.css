@@ -2,7 +2,6 @@
     position: relative;
     max-width: 430px;
     background: white;
-    margin: auto;
     border-radius: 10px;
     display: flex;
     flex-direction: column;

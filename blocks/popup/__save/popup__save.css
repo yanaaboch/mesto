@@ -7,8 +7,10 @@
     margin-bottom: 37px;
     font-family: 'Inter', sans-serif;
     border-radius: 2px;
-    
+    font-size: 18px;
+    line-height: 21.78px;
     border: none;
+    transition: opacity 335ms ease-in;
 }
 
 .popup__save:hover {
@@ -23,5 +25,6 @@
         margin-top: 45px;
         font-size: 14px;
         line-height: 16.94px;
+        margin-bottom: 25px;
     }
 }

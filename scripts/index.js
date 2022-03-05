@@ -5,14 +5,20 @@ const closePopup = popup.querySelector('.popup__close');
 const submitButton = popup.querySelector('.popup__save');
 const authorName = document.querySelector('.profile__title');
 const authorJob = document.querySelector('.profile__subtitle');
-const popupAuthorName = popup.querySelector('.popup__input_name');
-const popupAuthorJob = popup.querySelector('.popup__input_description');
+const popupAuthorName = popup.querySelector('.popup__input_type_name');
+const popupAuthorJob = popup.querySelector('.popup__input_type_description');
+
+
 
 
 function togglePopup() {
     popup.classList.toggle('popup_opened');
-    popupAuthorName.value = authorName.textContent;
-    popupAuthorJob.value = authorJob.textContent;
+    let contains = popup.classList.contains('popup_opened');
+    console.log(contains);
+    if (contains) {
+        popupAuthorName.value = authorName.textContent;
+        popupAuthorJob.value = authorJob.textContent;
+    }
 }
 
 openPopup.addEventListener('click', togglePopup);
