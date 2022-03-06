@@ -14,7 +14,6 @@ const popupAuthorJob = popup.querySelector('.popup__input_type_description');
 function togglePopup() {
     popup.classList.toggle('popup_opened');
     let contains = popup.classList.contains('popup_opened');
-    console.log(contains);
     if (contains) {
         popupAuthorName.value = authorName.textContent;
         popupAuthorJob.value = authorJob.textContent;
