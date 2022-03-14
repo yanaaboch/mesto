@@ -12,7 +12,7 @@
     color: inherit;
     background-color: transparent;
     border-radius: 2px;
-    transition: opacity 335ms ease-in;
+    transition: opacity 335ms linear;
 }
 
 .profile__add-button:hover {

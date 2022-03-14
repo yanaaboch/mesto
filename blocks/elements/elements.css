@@ -4,8 +4,8 @@
     margin: 0 auto;
     max-width: 880px;
     gap: 20px 17px;
-    padding-top: 51px;
     justify-content: center;
+    padding-top: 51px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
