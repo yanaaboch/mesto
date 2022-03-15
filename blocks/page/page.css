@@ -1,6 +1,7 @@
 .page {
     background-color: black;
-    min-width: 1280px;
+    max-width: 1280px;
+    margin: 0 auto;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -10,8 +11,3 @@
     text-rendering: optimizeLegibility;
 }
 
-@media screen and (min-width: 320px) and (max-width: 426px) {
-    .page {
-        min-width: 320px;
-    }
-}
