@@ -64,13 +64,13 @@ const initialCards = [
   const CardList = document.querySelector('.elements');
 
   function renderCard(initialCards) {
-      return `<article class="element">
-      <img src="${initialCards.link}" class="element__image" alt="Шаблон Фото">
-      <div class="element__info">
-      <h2 class="element__title">${initialCards.name}</h2>
-      <button class="element__button" type="button" aria-label="Лайк"></button>
-      </div>
-    </article>`
+      const card = document.querySelector('.element-template').content.querySelector('.element').cloneNode(true);
+
+      card.querySelector('.element__title').textContent = initialCards.name;
+      card.querySelector('.element__image').src = initialCards.link;
+    CardList.append(card);
   }
 
-  CardList.innerHTML += initialCards.map(renderCard).join('');
+  initialCards.map(renderCard);
+
+
