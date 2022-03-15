@@ -37,16 +37,31 @@
             <p class="footer__text">&copy;2022 Mesto Russia</p>
         </footer>
       
-
-        <div class="popup">
+        <!--Попап редактирования профиля-->
+        <div class="popup" id="editProfile">
         
-            <div class="popup__container">
-                <button class="popup__close" type="button" aria-label="Закрыть попап"></button>
+            <div class="popup__container" id="editProfile">
+                <button class="popup__close" id="profileClose" type="button" aria-label="Закрыть попап"></button>
                 <form class="popup__form" name="profileData">
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <input class="popup__input popup__input_type_name" name="title" type="text">
                     <input class="popup__input popup__input_type_description" name="subtitle" type="text">
                     <button class="popup__save" type="submit">Сохранить</button>
+                </form>
+            
+            </div>
+        </div>
+
+        <!--Попап добавления карточки-->
+        <div class="popup" id="addCard">
+        
+            <div class="popup__container" id="addCard">
+                <button class="popup__close" id="cardClose" type="button" aria-label="Закрыть попап"></button>
+                <form class="popup__form" name="newCard">
+                    <h2 class="popup__title">Новое место</h2>
+                    <input class="popup__input popup__input_type_cardname" name="title" type="text">
+                    <input class="popup__input popup__input_type_cardlink" name="subtitle" type="url">
+                    <button class="popup__save" type="submit">Создать</button>
                 </form>
             
             </div>

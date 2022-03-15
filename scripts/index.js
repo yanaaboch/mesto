@@ -1,12 +1,25 @@
-const popup = document.querySelector('.popup');
+const popup = document.querySelector('#editProfile');
 const formElement = document.querySelector('.popup__form');
 const openPopup = document.querySelector('.profile__edit-button');
-const closePopup = popup.querySelector('.popup__close');
+const closePopup = popup.querySelector('#profileClose');
 const submitButton = popup.querySelector('.popup__save');
 const authorName = document.querySelector('.profile__title');
 const authorJob = document.querySelector('.profile__subtitle');
 const popupAuthorName = popup.querySelector('.popup__input_type_name');
 const popupAuthorJob = popup.querySelector('.popup__input_type_description');
+const popupCardName = popup.querySelector('.popup__input_type_cardname');
+const popupCardLink = popup.querySelector('.popup__input_type_cardlink');
+const cardPopup = document.querySelector('#addCard');
+const openCardPopup = document.querySelector('.profile__add-button');
+const closeCardPopup = document.querySelector('#cardClose');
+
+function toggleCardPopup() {
+  cardPopup.classList.toggle('popup_opened');
+}
+
+openCardPopup.addEventListener('click', toggleCardPopup);
+
+closeCardPopup.addEventListener('click', toggleCardPopup);
 
 
 
