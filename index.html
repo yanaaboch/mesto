@@ -42,11 +42,11 @@
         
             <div class="popup__container" id="editProfile">
                 <button class="popup__close" id="profileClose" type="button" aria-label="Закрыть попап"></button>
-                <form class="popup__form" name="profileData">
+                <form class="popup__form" id="profileForm" name="profileData">
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <input class="popup__input popup__input_type_name" name="title" type="text">
                     <input class="popup__input popup__input_type_description" name="subtitle" type="text">
-                    <button class="popup__save" type="submit">Сохранить</button>
+                    <button class="popup__save" id="profile-btn" type="submit">Сохранить</button>
                 </form>
             
             </div>
@@ -57,27 +57,29 @@
         
             <div class="popup__container" id="addCard">
                 <button class="popup__close" id="cardClose" type="button" aria-label="Закрыть попап"></button>
-                <form class="popup__form" name="newCard">
+                <form class="popup__form" id="cardForm" name="newCard">
                     <h2 class="popup__title">Новое место</h2>
                     <input class="popup__input popup__input_type_cardname" name="title" type="text">
                     <input class="popup__input popup__input_type_cardlink" name="subtitle" type="url">
-                    <button class="popup__save" type="submit">Создать</button>
+                    <button class="popup__save" id="card-btn" type="submit">Создать</button>
                 </form>
             
             </div>
         </div>
         
-        <template class="element-template">
-            <article class="element">
-                <img src="#" class="element__image" alt="Шаблон Фото">
-                <div class="element__info">
-                <h2 class="element__title"></h2>
-                <button class="element__button" type="button" aria-label="Лайк"></button>
-                </div>
-            </article>
-        </template>
+
       
     </div>
+
+    <template class="elements-template">
+        <article class="element">
+            <img src="#" class="element__image" alt="Шаблон Фото">
+            <div class="element__info">
+            <h2 class="element__title"></h2>
+            <button class="element__button" type="button" aria-label="Лайк"></button>
+            </div>
+        </article>
+    </template>
     
    
 
