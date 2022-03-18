@@ -13,8 +13,8 @@ const popupCardLink = popup.querySelector('.popup__input_type_cardlink');
 const cardPopup = document.querySelector('#addCard');
 const openCardPopup = document.querySelector('.profile__add-button');
 const closeCardPopup = document.querySelector('#cardClose');
-//const cardName = document.querySelector('.element__title');
-//const cardLink = document.querySelector('.element__image');
+const LikeButton = document.querySelector('.element__like-button');
+const DeleteButton = document.querySelector('.element__delete-button');
 
 
 
@@ -93,10 +93,20 @@ const initialCards = [
     elementTitle.textContent = name;
     elementImage.src = link;
     elementImage.alt = "Фотография места " + name;
+
+    element.querySelector('.element__like-button').addEventListener('click', evt => {
+      evt.target.classList.toggle('element__like-button_active');
+    });
+
+    element.querySelector('.element__delete-button').addEventListener('click', evt => {
+      evt.target.closest('.element').remove();
+    });
     
     return element;
 
   }
+
+  //функция добавления карточки в разметку
 
   function addCard(container, cardElement) {
     container.prepend(cardElement);
