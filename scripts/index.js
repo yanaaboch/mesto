@@ -15,8 +15,16 @@ const openCardPopup = document.querySelector('.profile__add-button');
 const closeCardPopup = document.querySelector('#cardClose');
 const LikeButton = document.querySelector('.element__like-button');
 const DeleteButton = document.querySelector('.element__delete-button');
+const popupImage = document.querySelector('#openCard');
+const openPopupImage = document.querySelector('popup__image');
+const closePopupImage = document.querySelector('#closeImage');
 
 
+function togglePopupImage() {
+  popupImage.classList.toggle('popup_opened');
+};
+
+closePopupImage.addEventListener('click', togglePopupImage);
 
 
 
@@ -101,6 +109,13 @@ const initialCards = [
     element.querySelector('.element__delete-button').addEventListener('click', evt => {
       evt.target.closest('.element').remove();
     });
+
+    element.querySelector('.element__image').addEventListener('click', evt => {
+      document.querySelector('.popup__image').src = evt.target.src;
+      document.querySelector('.popup__image-caption').textContent = name;
+      togglePopupImage();
+      
+    });
     
     return element;
 
@@ -128,32 +143,3 @@ const initialCards = [
     CardForm.reset();
   });
   
-  //функция создания карточек из массива
-
-//function createCard(initialCards) {
-//      const card = document.querySelector('.element-template').content.querySelector('.element').cloneNode(true);
-//      card.querySelector('.element__title').textContent = initialCards.name;
-//      card.querySelector('.element__image').src = initialCards.link;
-//      CardsContainer.append(card);
-//      return card;
-//}
-
-//function renderCard (initialCards, CardsContainer) {
-//    const newCard = createCard({name: popupCardName.value, 
-//      link: popupCardLink.value});
-//    CardsContainer.prepend(newCard);
-//}
-
-//function AddCard(event) {
-//  event.preventDefault();
- // renderCard(initialCards, CardsContainer);
-  
-
- // toggleCardPopup();
- // event.currentTarget.reset();
-//}
-//CardForm.addEventListener('submit', AddCard);
-//initialCards.forEach(card => { createCard(card); });
-
-
-
