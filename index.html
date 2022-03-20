@@ -38,14 +38,14 @@
         </footer>
       
         <!--Попап редактирования профиля-->
-        <div class="popup" id="editProfile">
+        <div class="popup popup_edit">
         
             <div class="popup__container">
                 <button class="popup__close" id="profileClose" type="button" aria-label="Закрыть попап"></button>
                 <form class="popup__form" id="profileForm" name="profileData">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <input class="popup__input popup__input_type_name" name="title" type="text">
-                    <input class="popup__input popup__input_type_description" name="subtitle" type="text">
+                    <input class="popup__input popup__input_type_name" placeholder="Введите имя" name="title" type="text">
+                    <input class="popup__input popup__input_type_description" placeholder="Введите информацию о себе" name="subtitle" type="text">
                     <button class="popup__save" id="profile-btn" type="submit">Сохранить</button>
                 </form>
             
@@ -53,14 +53,14 @@
         </div>
 
         <!--Попап добавления карточки-->
-        <div class="popup" id="addCard">
+        <div class="popup popup_add">
         
             <div class="popup__container">
                 <button class="popup__close" id="cardClose" type="button" aria-label="Закрыть попап"></button>
                 <form class="popup__form" id="cardForm" name="newCard">
                     <h2 class="popup__title">Новое место</h2>
-                    <input class="popup__input popup__input_type_cardname" name="title" type="text">
-                    <input class="popup__input popup__input_type_cardlink" name="subtitle" type="url">
+                    <input class="popup__input popup__input_type_cardname" placeholder="Название места" name="title" type="text">
+                    <input class="popup__input popup__input_type_cardlink" placeholder="Ссылка на изображение" name="subtitle" type="url">
                     <button class="popup__save" id="card-btn" type="submit">Создать</button>
                 </form>
             
@@ -68,7 +68,7 @@
         </div>
         
         <!--Попап просмотра фото из карточки-->
-        <div class="popup popup_openimage" id="openCard">
+        <div class="popup popup_openimage popup_photo">
             <div class="popup__show-image">
                 <button class="popup__close" id="closeImage" type="button" aria-label="Закрыть изображение"></button>
                 <figure class="popup__content">
