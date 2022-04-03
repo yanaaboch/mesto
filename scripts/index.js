@@ -19,13 +19,25 @@ const popupImageCaption = document.querySelector('.popup__image-caption');
 const cardsContainer = document.querySelector('.elements');
 const cardForm = document.querySelector('#cardForm');
 
+//Нажатие на esc
+
+function keyHandler(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popupOpened)
+  }
+}
+
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', keyHandler);
 };
 
 function openPopup(popup) {
+  document.addEventListener('keydown', keyHandler);
   popup.classList.add('popup_opened');
+  popup.removeEventListener('click', openPopup);
 }
 
 //Закрытие попапа с фотографией места
@@ -33,6 +45,14 @@ function openPopup(popup) {
 imageCloseButton.addEventListener('click', evt => {
   closePopup(popupImage);
 });
+
+// закрытие попапа с фотографией места нажатием на оверлей
+
+popupImage.addEventListener('click', function(evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(popupImage)
+  }
+})
 
 //Открытие попапа редактирования профиля
 
@@ -51,6 +71,14 @@ profileCloseButton.addEventListener('click', evt => {
   closePopup(popupProfile);
 });
 
+// Закрытие попапа редактирования нажатием на оверлей
+
+popupProfile.addEventListener('click', function(evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(popupProfile)
+  }
+})
+
 //Открытие попапа добавления карточки
 
 cardOpenButton.addEventListener('click', evt => {
@@ -61,6 +89,14 @@ cardOpenButton.addEventListener('click', evt => {
 
 cardCloseButton.addEventListener('click', evt => {
   closePopup(cardPopup);
+})
+
+// Закрытие попапа добавления карточки нажатием на оверлей
+
+cardPopup.addEventListener('click', function(evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(cardPopup)
+  }
 })
 
 //Функция сохранения данных в попапе редактирования профиля
@@ -152,4 +188,8 @@ const initialCards = [
     closePopup(cardPopup);
     cardForm.reset();
   });
-  
+
+
+
+
+
