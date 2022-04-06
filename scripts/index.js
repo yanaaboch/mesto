@@ -18,12 +18,25 @@ const imageCloseButton = document.querySelector('#closeImage');
 const popupImageCaption = document.querySelector('.popup__image-caption');
 const cardsContainer = document.querySelector('.elements');
 const cardForm = document.querySelector('#cardForm');
+const NameInputError = document.querySelector('.name-input-error');
+const JobInputError = document.querySelector('.description-input-error');
+const elementTemplate = document.querySelector('.elements-template');
+
+
+function resetError() {
+  popupAuthorName.classList.remove('popup__input-error');
+  popupAuthorJob.classList.remove('popup__input-error');
+  NameInputError.classList.remove('popup__input-error_active');
+  NameInputError.textContent = '';
+  JobInputError.classList.remove('popup__input-error_active');
+  JobInputError.textContent = '';
+}
 
 //Нажатие на esc
 
-function keyHandler(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
+function closePopupOnEsc(evt) {
   if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened)
   }
 }
@@ -31,14 +44,13 @@ function keyHandler(evt) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', keyHandler);
+  document.removeEventListener('keydown', closePopupOnEsc);
 };
 
 function openPopup(popup) {
-  document.addEventListener('keydown', keyHandler);
+  document.addEventListener('keydown', closePopupOnEsc);
   popup.classList.add('popup_opened');
-  popup.removeEventListener('click', openPopup);
-}
+};
 
 //Закрытие попапа с фотографией места
 
@@ -58,17 +70,17 @@ popupImage.addEventListener('click', function(evt) {
 
 profileOpenButton.addEventListener('click', evt =>{
   openPopup(popupProfile);
-  const contains = popupProfile.classList.contains('popup_opened');
-    if (contains) {
-        popupAuthorName.value = authorName.textContent;
-        popupAuthorJob.value = authorJob.textContent;
-    };
+  popupAuthorName.value = authorName.textContent;
+  popupAuthorJob.value = authorJob.textContent;
+  submitButton.removeAttribute('disabled', 'disabled');
+  submitButton.classList.remove('popup__save_inactive');
 });
 
 //Закрытие попапа редактирования профиля
 
 profileCloseButton.addEventListener('click', evt => {
   closePopup(popupProfile);
+  resetError(profileCloseButton);
 });
 
 // Закрытие попапа редактирования нажатием на оверлей
@@ -110,37 +122,10 @@ function submitData (evt) {
 
 profileForm.addEventListener('submit', submitData);
 
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-
   //функция создания карточки
 
   function createCard(name, link) {
-    const element = document.querySelector('.elements-template').content.querySelector('.element').cloneNode(true);
+    const element = elementTemplate.content.querySelector('.element').cloneNode(true);
     const elementTitle = element.querySelector('.element__title');
     const elementImage = element.querySelector('.element__image');
 
@@ -156,8 +141,8 @@ const initialCards = [
       evt.target.closest('.element').remove();
     });
 
-    element.querySelector('.element__image').addEventListener('click', evt => {
-      openPopupImage.src = evt.target.src;
+    element.querySelector('.element__image').addEventListener('click', () => {
+      openPopupImage.src = link;
       openPopupImage.alt = name;
       popupImageCaption.textContent = name;
       openPopup(popupImage);
