@@ -22,14 +22,15 @@ const NameInputError = document.querySelector('.name-input-error');
 const JobInputError = document.querySelector('.description-input-error');
 const elementTemplate = document.querySelector('.elements-template');
 
-
 function resetError() {
-  popupAuthorName.classList.remove('popup__input-error');
-  popupAuthorJob.classList.remove('popup__input-error');
-  NameInputError.classList.remove('popup__input-error_active');
-  NameInputError.textContent = '';
-  JobInputError.classList.remove('popup__input-error_active');
-  JobInputError.textContent = '';
+  if (closePopup) {
+    const inputErrors = Array.from(popupProfile.querySelectorAll('.popup__input-error_active'));
+    inputErrors.forEach((inputError) => {
+
+    inputError.classList.remove('popup__input-error_active');
+    inputError.textContent = '';
+  });
+};
 }
 
 //Нажатие на esc
@@ -37,7 +38,7 @@ function resetError() {
 function closePopupOnEsc(evt) {
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened)
+    closePopup(popupOpened);
   }
 }
 
@@ -69,6 +70,7 @@ popupImage.addEventListener('click', function(evt) {
 //Открытие попапа редактирования профиля
 
 profileOpenButton.addEventListener('click', evt =>{
+  resetError();
   openPopup(popupProfile);
   popupAuthorName.value = authorName.textContent;
   popupAuthorJob.value = authorJob.textContent;
@@ -80,20 +82,31 @@ profileOpenButton.addEventListener('click', evt =>{
 
 profileCloseButton.addEventListener('click', evt => {
   closePopup(popupProfile);
-  resetError(profileCloseButton);
 });
 
 // Закрытие попапа редактирования нажатием на оверлей
 
 popupProfile.addEventListener('click', function(evt) {
   if (evt.target.classList.contains('popup')) {
-    closePopup(popupProfile)
+    closePopup(popupProfile);
   }
-})
+});
+
+
+const resetSubmitButton = function() {
+  popupCardName.value = ''; 
+  popupCardLink.value = '';
+  const submitButtonCard = cardForm.querySelector('.popup__save');
+  submitButtonCard.setAttribute('disabled', true);
+  submitButtonCard.classList.add('popup__save_inactive');
+  
+};
+
 
 //Открытие попапа добавления карточки
 
 cardOpenButton.addEventListener('click', evt => {
+  resetSubmitButton();
   openPopup(cardPopup);
 });
 
