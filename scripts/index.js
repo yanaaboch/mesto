@@ -23,15 +23,18 @@ const JobInputError = document.querySelector('.description-input-error');
 const elementTemplate = document.querySelector('.elements-template');
 
 function resetError() {
-  if (closePopup) {
-    const inputErrors = Array.from(popupProfile.querySelectorAll('.popup__input-error_active'));
+  
+    const inputErrors = Array.from(document.querySelectorAll('.popup__input-error_visible'));
     inputErrors.forEach((inputError) => {
-
-    inputError.classList.remove('popup__input-error_active');
+    inputError.classList.remove('popup__input-error_visible');
     inputError.textContent = '';
-  });
+    });
+
+    const errorClasses = Array.from(document.querySelectorAll('.popup__input_type_error'));
+    errorClasses.forEach((errorClass) => {
+    errorClass.classList.remove('popup__input_type_error');
+    });
 };
-}
 
 //Нажатие на esc
 
@@ -106,6 +109,7 @@ const resetSubmitButton = function() {
 //Открытие попапа добавления карточки
 
 cardOpenButton.addEventListener('click', evt => {
+  resetError();
   resetSubmitButton();
   openPopup(cardPopup);
 });
