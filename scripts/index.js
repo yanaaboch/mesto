@@ -1,3 +1,34 @@
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+export { openPopupImage, popupImageCaption, popupImage, openPopup, initialCards };
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 const popupProfile = document.querySelector('.popup_edit');
 const profileForm = document.querySelector('#profileForm');
 const profileOpenButton = document.querySelector('.profile__edit-button');
@@ -21,6 +52,18 @@ const cardForm = document.querySelector('#cardForm');
 const NameInputError = document.querySelector('.name-input-error');
 const JobInputError = document.querySelector('.description-input-error');
 const elementTemplate = document.querySelector('.elements-template');
+
+const enableValidationSetting = {
+  inputErrorClass: 'popup__input-error_visible',
+  errorClass: 'popup__input_type_error',
+  inactiveButtonClass: 'popup__save_inactive',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save',
+  formSelector: '.popup__form'
+};
+
+const formValidProfile = new FormValidator(enableValidationSetting, popupProfile);
+const formValidAddCard = new FormValidator(enableValidationSetting, cardPopup);
 
 function resetError() {
   
@@ -137,59 +180,45 @@ function submitData (evt) {
     closePopup(popupProfile);
 }
 
-profileForm.addEventListener('submit', submitData);
+  profileForm.addEventListener('submit', submitData);
 
-  //функция создания карточки
+  function createCard(data) {
+    const card = new Card(data, '.elements-template');
+    const cardElement = card.generateCard();
 
-  function createCard(name, link) {
-    const element = elementTemplate.content.querySelector('.element').cloneNode(true);
-    const elementTitle = element.querySelector('.element__title');
-    const elementImage = element.querySelector('.element__image');
+    return cardElement;
+  };
 
-    elementTitle.textContent = name;
-    elementImage.src = link;
-    elementImage.alt = "Фотография места " + name;
 
-    element.querySelector('.element__like-button').addEventListener('click', evt => {
-      evt.target.classList.toggle('element__like-button_active');
-    });
-
-    element.querySelector('.element__delete-button').addEventListener('click', evt => {
-      evt.target.closest('.element').remove();
-    });
-
-    element.querySelector('.element__image').addEventListener('click', () => {
-      openPopupImage.src = link;
-      openPopupImage.alt = name;
-      popupImageCaption.textContent = name;
-      openPopup(popupImage);
-    });
-    
-    return element;
-
-  }
 
   //функция добавления карточки в разметку
 
-  function addCard(container, cardElement) {
-    container.prepend(cardElement);
+  function addCard(cardsContainer, cardElement) {
+    cardsContainer.prepend(cardElement);
   }
 
-  initialCards.forEach(item => {
-    addCard(cardsContainer, createCard(item.name, item.link));
+  initialCards.forEach(card => {
+    addCard(cardsContainer, createCard(card));
   });
+
+
 
   cardForm.addEventListener('submit', evt => {
     evt.preventDefault();
+    const data = {
+    newCardName: popupCardName.value,
+    newCardLink: popupCardLink.value
+    };
 
-    const newCardName = popupCardName.value;
-    const newCardLink = popupCardLink.value;
-
-    addCard(cardsContainer, createCard(newCardName, newCardLink));
+    addCard(cardsContainer, createCard(data));
 
     closePopup(cardPopup);
     cardForm.reset();
   });
+
+  formValidProfile.enableValidation();
+  formValidAddCard.enableValidation();
+
 
 
 
