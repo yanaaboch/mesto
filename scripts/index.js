@@ -1,33 +1,8 @@
+
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-export { openPopupImage, popupImageCaption, popupImage, openPopup, initialCards };
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import initialCards from './initialCards.js';
+export { openPopupImage, popupImageCaption, popupImage, openPopup };
 
 const popupProfile = document.querySelector('.popup_edit');
 const profileForm = document.querySelector('#profileForm');
@@ -197,24 +172,28 @@ function submitData (evt) {
     cardsContainer.prepend(cardElement);
   }
 
+
+
   initialCards.forEach(card => {
     addCard(cardsContainer, createCard(card));
   });
 
 
-
   cardForm.addEventListener('submit', evt => {
     evt.preventDefault();
-    const data = {
-    newCardName: popupCardName.value,
-    newCardLink: popupCardLink.value
-    };
+    const data =
+      {
+    name: popupCardName.value,
+    link: popupCardLink.value
+      };
+    
 
     addCard(cardsContainer, createCard(data));
 
     closePopup(cardPopup);
     cardForm.reset();
   });
+
 
   formValidProfile.enableValidation();
   formValidAddCard.enableValidation();

@@ -1,4 +1,5 @@
-import { openPopupImage, popupImageCaption, popupImage, openPopup, initialCards } from './index.js';
+import { openPopupImage, popupImageCaption, popupImage, openPopup } from './index.js';
+import initialCards from './initialCards.js';
 
 export default class Card {
     constructor(data, cardSelector) {
@@ -8,7 +9,7 @@ export default class Card {
     };
 
     _getTemplate() {
-        const cardElement = document.querySelector('.elements-template').content.querySelector('.element').cloneNode(true);
+        const cardElement = document.querySelector(this._cardSelector).content.querySelector('.element').cloneNode(true);
         return cardElement;
     };
 
@@ -48,12 +49,3 @@ export default class Card {
         });
     }
 }
-
-
-
-//initialCards.forEach((data) => {
-//    const card = new Card(data.name, data.link);
-//    const cardElement = card.generateCard();
-
- //   document.body.append(cardElement);
-//});
