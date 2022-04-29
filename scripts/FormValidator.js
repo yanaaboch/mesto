@@ -33,6 +33,7 @@ export default class FormValidator {
          return !inputElement.validity.valid;
         })
     };
+
     
 
     _toggleButtonState = (inputList, buttonElement, config) => {

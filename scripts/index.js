@@ -24,8 +24,8 @@ const imageCloseButton = document.querySelector('#closeImage');
 const popupImageCaption = document.querySelector('.popup__image-caption');
 const cardsContainer = document.querySelector('.elements');
 const cardForm = document.querySelector('#cardForm');
-const NameInputError = document.querySelector('.name-input-error');
-const JobInputError = document.querySelector('.description-input-error');
+const nameInputError = document.querySelector('.name-input-error');
+const jobInputError = document.querySelector('.description-input-error');
 const elementTemplate = document.querySelector('.elements-template');
 
 const enableValidationSetting = {
@@ -117,6 +117,8 @@ popupProfile.addEventListener('click', function(evt) {
 const resetSubmitButton = function() {
   popupCardName.value = ''; 
   popupCardLink.value = '';
+  
+  
   const submitButtonCard = cardForm.querySelector('.popup__save');
   submitButtonCard.setAttribute('disabled', true);
   submitButtonCard.classList.add('popup__save_inactive');
@@ -148,14 +150,14 @@ cardPopup.addEventListener('click', function(evt) {
 
 //Функция сохранения данных в попапе редактирования профиля
 
-function submitData (evt) {
+function submitDataProfile (evt) {
     evt.preventDefault();
     authorName.textContent = popupAuthorName.value;
     authorJob.textContent = popupAuthorJob.value;
     closePopup(popupProfile);
 }
 
-  profileForm.addEventListener('submit', submitData);
+  profileForm.addEventListener('submit', submitDataProfile);
 
   function createCard(data) {
     const card = new Card(data, '.elements-template');
