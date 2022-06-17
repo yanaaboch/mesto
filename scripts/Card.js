@@ -1,11 +1,9 @@
-import { openPopupImage, popupImageCaption, popupImage, openPopup } from './index.js';
-import initialCards from './initialCards.js';
-
 export default class Card {
-    constructor(data, cardSelector) {
+    constructor( {data, handleCardClick}, cardSelector) {
         this._image = data.link;
         this._title = data.name;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     };
 
     _getTemplate() {
@@ -19,6 +17,8 @@ export default class Card {
         this._element.querySelector('.element__title').textContent = this._title;
         this._element.querySelector('.element__image').src = this._image;
 
+        
+
         return this._element;
     };
 
@@ -30,11 +30,8 @@ export default class Card {
         evt.target.closest('.element').remove();
     };
 
-    _handleCardOpen() {
-        openPopupImage.src = this._image;
-        openPopupImage.alt = this._title;
-        popupImageCaption.textContent = this._title;
-        openPopup(popupImage);
+    _handleCardClick() {
+        this._handleCardClick(this._title, this._image);
     };
 
     _setEventListeners() {
@@ -45,7 +42,7 @@ export default class Card {
             this._handleCardDelete(evt);
         });
         this._element.querySelector('.element__image').addEventListener('click', () => {
-            this._handleCardOpen();
+           this._handleCardClick(this._title, this._image)
         });
     }
 }
