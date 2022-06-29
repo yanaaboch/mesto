@@ -1,35 +1,36 @@
 
-import FormValidator from './FormValidator.js';
-import Card from './Card.js';
-import initialCards from './initialCards.js';
-import Section from './Section.js';
-import PopupWithForm from './PopupWithForm.js';
-import PopupWithImage from './PopupWithImage.js';
-import UserInfo from './UserInfo.js';
-
-const popupProfile = document.querySelector('.popup_edit');
-const profileForm = document.querySelector('#profileForm');
-const profileOpenButton = document.querySelector('.profile__edit-button');
-const profileCloseButton = document.querySelector('#profileClose');
-const submitButton = document.querySelector('.popup__save');
-const authorName = document.querySelector('.profile__title');
-const authorJob = document.querySelector('.profile__subtitle');
-const popupAuthorName = document.querySelector('.popup__input_type_name');
-const popupAuthorJob = document.querySelector('.popup__input_type_description');
-const popupCardName = document.querySelector('.popup__input_type_cardname');
-const popupCardLink = document.querySelector('.popup__input_type_cardlink');
-const cardPopup = document.querySelector('.popup_add');
-const cardOpenButton = document.querySelector('.profile__add-button');
-const cardCloseButton = document.querySelector('#cardClose');
-const popupImage = document.querySelector('.popup_photo');
-const openPopupImage = document.querySelector('.popup__image');
-const imageCloseButton = document.querySelector('#closeImage');
-const popupImageCaption = document.querySelector('.popup__image-caption');
-const cardsContainer = document.querySelector('.elements');
-const cardForm = document.querySelector('#cardForm');
-const nameInputError = document.querySelector('.name-input-error');
-const jobInputError = document.querySelector('.description-input-error');
-const elementTemplate = document.querySelector('.elements-template');
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import {
+  initialCards,
+  popupProfile,
+  profileForm,
+  profileOpenButton,
+  profileCloseButton,
+  submitButton,
+  authorName,
+  authorJob,
+  popupAuthorName,
+  popupAuthorJob,
+  popupCardName,
+  popupCardLink,
+  cardPopup,
+  cardOpenButton,
+  cardCloseButton,
+  popupImage,
+  openPopupImage,
+  imageCloseButton,
+  popupImageCaption,
+  cardsContainer,
+  cardForm,
+  nameInputError,
+  jobInputError,
+  elementTemplate
+} from '../utils/constants.js';
 
 const cardList = new Section({
   data: initialCards,
