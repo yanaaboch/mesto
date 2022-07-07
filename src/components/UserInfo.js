@@ -1,18 +1,18 @@
 export default class UserInfo {
-    constructor({ titleContainer, subtitleContainer }) {
-        this._titleContainer = titleContainer;
-        this._subtitleContainer = subtitleContainer;
+    constructor({ titleSelector, subtitleSelector }) {
+        this._titleSelector = titleSelector;
+        this._subtitleSelector = subtitleSelector;
     };
 
     getUserInfo() {
         this._profileValues = {};
-        this._profileValues.title = this._titleContainer.textContent;
-        this._profileValues.subtitle = this._subtitleContainer.textContent;
+        this._profileValues.title = this._titleSelector.textContent;
+        this._profileValues.subtitle = this._subtitleSelector.textContent;
         return this._profileValues;
     };
 
     setUserInfo(formData) {
-        this._titleContainer.textContent = formData['title'];
-        this._subtitleContainer.textContent = formData['subtitle'];
+        this._titleSelector.textContent = formData['title'];
+        this._subtitleSelector.textContent = formData['subtitle'];
     };
 }
