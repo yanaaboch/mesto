@@ -27,7 +27,7 @@ export default class FormValidator {
 
   _toggleButtonState() {
 
-    if (this._hasInvalidInput(this._inputList)) {
+    if (this._hasInvalidInput()) {
       this._buttonElement.classList.add(this._data.inactiveButtonClass);
       this._buttonElement.setAttribute('disabled', true);
     } else {
@@ -54,15 +54,15 @@ export default class FormValidator {
 
   resetError() {
   
-    const inputErrors = Array.from(document.querySelectorAll('.popup__input-error_visible'));
+    const inputErrors = Array.from(document.querySelectorAll(inputErrorClass));
     inputErrors.forEach((inputError) => {
-    inputError.classList.remove('popup__input-error_visible');
+    inputError.classList.remove(inputErrorClass);
     inputError.textContent = '';
     });
 
-    const errorClasses = Array.from(document.querySelectorAll('.popup__input_type_error'));
+    const errorClasses = Array.from(document.querySelectorAll(errorClass));
     errorClasses.forEach((errorClass) => {
-    errorClass.classList.remove('popup__input_type_error');
+    errorClass.classList.remove(errorClass);
     });
 }; 
 

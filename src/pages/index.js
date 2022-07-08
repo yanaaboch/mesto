@@ -32,6 +32,7 @@ import {
   elementTemplate
 } from '../utils/constants.js';
 
+
 const createCard = (data) => {
   const card = new Card({
     data: data,
@@ -68,8 +69,8 @@ cardFormAdd.setEventListeners();
 
 
 const userInfo = new UserInfo({
-  titleSelector: authorName,
-  subtitleSelector: authorJob
+  username: '.profile__title',
+  job: '.profile__subtitle'
 });
 
 const formProfile = new PopupWithForm({
@@ -80,6 +81,17 @@ const formProfile = new PopupWithForm({
   }
 });
 formProfile.setEventListeners();
+
+profileOpenButton.addEventListener('click', () => {
+  const info = userInfo.getUserInfo();
+  popupAuthorName.value = info.username;
+  popupAuthorJob.value = info.job;
+  formProfile.open();
+  formValidProfile.resetValidation();
+  
+  
+  });
+
 
 const enableValidationSetting = {
   inputErrorClass: 'popup__input-error_visible',
@@ -97,16 +109,6 @@ const formValidAddCard = new FormValidator(enableValidationSetting, cardPopup);
 
   formValidProfile.enableValidation();
   formValidAddCard.enableValidation();
-
-  profileOpenButton.addEventListener('click', () => {
-    const info = userInfo.getUserInfo();
-    popupAuthorName.value = info.title;
-    popupAuthorJob.value = info.subtitle;
-    formProfile.open();
-    formValidProfile.resetValidation();
-    
-    
-    });
 
   cardOpenButton.addEventListener('click', () => {
     

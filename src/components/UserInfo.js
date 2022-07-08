@@ -1,18 +1,20 @@
 export default class UserInfo {
-    constructor({ titleSelector, subtitleSelector }) {
-        this._titleSelector = titleSelector;
-        this._subtitleSelector = subtitleSelector;
-    };
-
+    constructor({ username, job }) {
+      this._username = document.querySelector(username);
+      this._job = document.querySelector(job);
+    }
+  
     getUserInfo() {
-        this._profileValues = {};
-        this._profileValues.title = this._titleSelector.textContent;
-        this._profileValues.subtitle = this._subtitleSelector.textContent;
-        return this._profileValues;
-    };
-
+      const userInfo = {
+        username: this._username.textContent,
+        job: this._job.textContent
+      }
+  
+      return userInfo;
+    }
+  
     setUserInfo(formData) {
-        this._titleSelector.textContent = formData['title'];
-        this._subtitleSelector.textContent = formData['subtitle'];
-    };
-}
+      this._username.textContent = formData['title'];
+      this._job.textContent = formData['subtitle'];
+    }
+  }
