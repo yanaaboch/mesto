@@ -17,13 +17,61 @@ import {
   cardPopup,
   cardOpenButton,
   popupEditAvatar,
+  elementTemplate,
+  cardsContainer
 } from "../utils/constants.js";
 
 import api from "../api/api";
 
 let userId;
 
-api.getInitialCards().then((data) => cardList.renderItems(data));
+const userInfo = new UserInfo({
+  name: authorName,
+  info: authorJob,
+  avatar: profileAvatar,
+});
+
+
+api.initialData()
+.then(([cards, user]) => {
+  userInfo.setUserInfo(user);
+  userId = user._id;
+  cardList.renderItems(cards)
+}).catch((err) => console.log(err))
+
+
+
+//Функция создания карточки
+const createCard = (data) => {
+  const card = new Card(
+    {
+      data: data,
+      handleCardClick: _ => popupImageContainer.open(data),
+
+      handleLikeClick: _ => card.handleLikeClick(),
+
+      handleConfirmDelete: _ => {
+        confirmDeletePopup.setSubmitAction( _ => {
+          confirmDeletePopup.renderLoadingWhileDeleting(true);
+          api.delete(data._id)
+            .then( _ => {
+              card.handleCardDelete();
+              confirmDeletePopup.close();
+            })
+            .catch( err => console.log(err))
+            .finally( _ => confirmDeletePopup.renderLoadingWhileDeleting(false));
+        });
+        confirmDeletePopup.open();
+      },
+    },
+    elementTemplate,
+    api,
+    userId
+  );
+  return card;
+};
+
+
 
 const cardList = new Section(
   {
@@ -33,62 +81,19 @@ const cardList = new Section(
       cardList.addItem(cardElement);
     },
   },
-  ".elements"
+  cardsContainer
 );
-
-const userInfo = new UserInfo({
-  name: authorName,
-  info: authorJob,
-  avatar: profileAvatar,
-});
-
-api.getUser().then((user) => {
-  userInfo.setUserInfo(user);
-  userId = user._id;
-});
-
-//Функция создания карточки
-const createCard = (data) => {
-  const card = new Card(
-    {
-      data: data,
-      handleCardClick: (_) => popupImageContainer.open(data),
-
-      handleLikeClick: (_) => card._handleCardLike(),
-
-      handleConfirmDelete: (_) => {
-        confirmDeletePopup.setSubmitAction((_) => {
-          confirmDeletePopup.renderLoadingWhileDeleting(true);
-          api
-            .delete(data._id)
-            .then((_) => {
-              console.log(_);
-              card._handleCardDelete();
-              confirmDeletePopup.close();
-            })
-            .catch((err) => console.log(err))
-            .finally((_) =>
-              confirmDeletePopup.renderLoadingWhileDeleting(false)
-            );
-        });
-        confirmDeletePopup.open();
-      },
-    },
-    ".elements-template",
-    api,
-    userId
-  );
-  return card;
-};
 
 const cardFormAdd = new PopupWithForm({
   popupSelector: ".popup_add",
   submitForm: (formData) => {
+    
     formData["link"] = formData["subtitle"];
     formData["name"] = formData["title"];
 
     cardFormAdd.renderLoading(true);
-    api.addNewCard(formData).then((response) => {
+    api.addNewCard(formData)
+    .then((response) => {
       const card = createCard(response);
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
@@ -109,19 +114,24 @@ const formProfile = new PopupWithForm({
     formProfile.renderLoading(true);
     api.editUser(dataForm).then((user) => {
       userInfo.setUserInfo(user);
-      formProfile.renderLoading(false);
       formProfile.close();
     })
     .catch(err => console.log(err))
+    .finally( _ => formProfile.renderLoading(false))
   },
 });
 formProfile.setEventListeners();
 
 profileOpenButton.addEventListener("click", () => {
-  popupAuthorName.value = authorName.textContent;
-  popupAuthorJob.value = authorJob.textContent;
-  formProfile.open();
+  const userData = userInfo.getUserInfo()
+
+  popupAuthorName.value = userData.name;
+  popupAuthorJob.value = userData.info;
+
   formValidProfile.resetValidation();
+
+  formProfile.open();
+
 });
 
 const enableValidationSetting = {
@@ -138,6 +148,8 @@ const formValidProfile = new FormValidator(
   popupProfile
 );
 const formValidAddCard = new FormValidator(enableValidationSetting, cardPopup);
+
+
 const popupAvatarEditFromValidator = new FormValidator(
   enableValidationSetting,
   popupEditAvatar
