@@ -18,8 +18,8 @@
                 <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Фото аватар">
                 <div class="profile__info">
                     <div class="profile__text">
-                        <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <p class="profile__subtitle">Исследователь океана</p>
+                        <h1 class="profile__title"></h1>
+                        <p class="profile__subtitle"></p>
                     </div>
                     <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
                 </div>
@@ -75,13 +75,43 @@
             <div class="popup__show-image">
                 <button class="popup__close" id="closeImage" type="button" aria-label="Закрыть изображение"></button>
                 <figure class="popup__content">
-                    <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Загруженное изборажение">
+                    <img class="popup__image" src="" alt="Загруженное изборажение">
                     <figcaption class="popup__image-caption"></figcaption>
                 </figure>
             </div>
         </div>
+
+        <!-- Попап удаления карточки -->
+        <div class="popup popup_confirm-delete">
+            <div class="popup__container popup__overlay">
+              <form class="popup__form" name="popupForm" novalidate>
+                <h2 class="popup__title">Вы уверены?</h2>
+                <button type="submit" class="popup__save">Да</button>
+              </form>
+              <button type="button" class="popup__close"></button>
+            </div>
+        </div>
       
     </div>
+
+    <!-- Попап смены фото профиля -->
+
+    <div class="popup popup_avatar-edit">
+        <div class="popup__container popup__overlay">
+          <form class="popup__form" name="popupForm" novalidate>
+            <h2 class="popup__title">Обновить аватар</h2>
+            
+            <input class="popup__input popup__input_type_cardlink" id="link-input" placeholder="Ссылка на изображение" name="subtitle" type="url" required>
+            <span class="popup__input-error" id="link-input-error"></span>
+            <button class="popup__save" id="card-btn" type="submit">Сохранить</button>
+
+          </form>
+          <button type="button" class="popup__close"></button>
+        </div>
+      </div>
+
+
+
 
     <template class="elements-template">
         <article class="element">
@@ -89,7 +119,10 @@
             <button class="element__delete-button" type="button" aria-label="Удалить"></button>
             <div class="element__info">
             <h2 class="element__title"></h2>
-            <button class="element__like-button" type="button" aria-label="Лайк"></button>
+            <div class="likes">
+                <button class="element__like-button" type="button" aria-label="Лайк"></button>
+                <div class="element__count_like"></div>
+            </div>
             </div>
         </article>
     </template>
