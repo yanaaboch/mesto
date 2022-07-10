@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -75,7 +76,7 @@
             <div class="popup__show-image">
                 <button class="popup__close" id="closeImage" type="button" aria-label="Закрыть изображение"></button>
                 <figure class="popup__content">
-                    <img class="popup__image" src="" alt="Загруженное изборажение">
+                    <img class="popup__image" src="%=require('./images/Байкал.png')%>" alt="Загруженное изборажение">
                     <figcaption class="popup__image-caption"></figcaption>
                 </figure>
             </div>
@@ -101,9 +102,9 @@
           <form class="popup__form" name="popupForm" novalidate>
             <h2 class="popup__title">Обновить аватар</h2>
             
-            <input class="popup__input popup__input_type_cardlink" id="link-input" placeholder="Ссылка на изображение" name="subtitle" type="url" required>
-            <span class="popup__input-error" id="link-input-error"></span>
-            <button class="popup__save" id="card-btn" type="submit">Сохранить</button>
+            <input class="popup__input popup__input_type_cardlink" id="link-input_avatar" placeholder="Ссылка на изображение" name="subtitle" type="url" required>
+            <span class="popup__input-error" id="link-input-avatar_error"></span>
+            <button class="popup__save" id="card_avater-btn" type="submit">Сохранить</button>
 
           </form>
           <button type="button" class="popup__close"></button>
